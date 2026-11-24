@@ -3,26 +3,98 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Jim's Page — a new home on the web. More coming soon.">
-  <meta name="theme-color" content="#101827">
-  <title>Jim's Page | Coming Soon</title>
+  <meta name="description" content="Jim's Page. A little space for big ideas, new projects, and whatever comes next.">
+  <meta name="theme-color" content="#050711">
+  <title>Jim's Page | A Little Space for Big Ideas</title>
   <style>
+    :root { color-scheme: dark; --ink: #f0f3fc; --muted: #aebbd3; }
     * { box-sizing: border-box; }
-    html { color-scheme: dark; }
-    body { margin: 0; min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 2rem; background: #101827; color: #f4f7fb; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    main { width: min(100%, 52rem); padding: clamp(2rem, 7vw, 5rem) 0; }
-    .brand { margin: 0 0 4rem; color: #93c5fd; font-size: 1rem; font-weight: 650; letter-spacing: .06em; }
-    h1 { margin: 0 0 1.5rem; max-width: 12ch; font-size: clamp(3rem, 9vw, 6rem); line-height: 1.04; letter-spacing: -.05em; }
-    .intro { max-width: 35rem; margin: 0; color: #bdc9db; font-size: clamp(1.1rem, 3vw, 1.4rem); line-height: 1.7; }
-    footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid #334155; color: #aab8cb; font-size: 1rem; }
+    html { scroll-behavior: smooth; background: #050711; }
+    body { margin: 0; padding: clamp(12px, 3vw, 42px); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: radial-gradient(ellipse at 50% 35%, #17142e 0, #080c1a 53%, #050711 85%); }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #a9c5ff; outline-offset: 6px; }
+    .shell { max-width: 1500px; margin: auto; overflow: hidden; border: 1px solid #66699f35; border-radius: 14px; background: #040812; box-shadow: 0 0 50px #6250f01a, 0 24px 100px #0009; }
+    .hero { min-height: min(880px, calc(100svh - 84px)); position: relative; isolation: isolate; display: flex; flex-direction: column; background: #03070e; }
+    .cosmos { position: absolute; inset: 0; z-index: -2; background-image: linear-gradient(90deg, #02061130, transparent 75%), url('assets/earth-horizon.webp'); background-size: cover; background-position: center; }
+    .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1; background: linear-gradient(180deg, #02040a30, transparent 35%, transparent 75%, #03070e 100%); }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 32px 7.5%; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.15rem; font-weight: 650; letter-spacing: -.04em; white-space: nowrap; }
+    .orbit { width: 27px; height: 27px; display: inline-block; position: relative; border: 1px solid #a7bfff; border-radius: 50%; transform: rotate(-35deg); }
+    .orbit::before { content: ""; position: absolute; inset: 7px -5px; border: 1px solid #b8a2ff; border-radius: 50%; }
+    .orbit::after { content: ""; position: absolute; width: 4px; height: 4px; top: 2px; right: 2px; border-radius: 50%; background: #dce7ff; box-shadow: 0 0 10px #a49bff; }
+    nav { display: flex; align-items: center; gap: 32px; padding: 11px 22px; border: 1px solid #a3b8fc16; border-radius: 99px; background: #080c1633; font-size: .9rem; }
+    nav a { color: #b3bfd4; transition: color .2s; }
+    nav a:hover, nav a[aria-current] { color: #fff; }
+    .content { width: 100%; padding: clamp(55px, 8vh, 100px) 7.5% 210px; }
+    .eyebrow { margin: 0 0 24px; font-size: .8rem; font-weight: 550; letter-spacing: .2em; color: #b7b6ef; }
+    h1 { font-size: clamp(3.1rem, 5.8vw, 5.75rem); line-height: 1.06; letter-spacing: -.055em; font-weight: 650; margin: 0 0 25px; max-width: 850px; text-wrap: balance; text-shadow: 0 2px 35px #0006; }
+    h1 span { color: #d6e4ff; }
+    .intro { max-width: 420px; margin: 0; font-size: 1.05rem; line-height: 1.75; color: var(--muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 7px; font-size: .9rem; font-weight: 550; transition: transform .2s, background .2s, box-shadow .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .primary { border: 1px solid #a69bff70; background: linear-gradient(110deg, #7229f6, #5558f0); box-shadow: inset 0 1px 0 #ffffff25, 0 4px 25px #5f45ea30; }
+    .primary:hover { box-shadow: 0 4px 32px #7553f860; }
+    .secondary { border: 1px solid #b6cbff30; background: #7390c31a; color: #e2e9f8; }
+    .secondary:hover { background: #7390c32b; }
+    .hero-footer { position: absolute; inset: auto 7.5% 30px; display: flex; justify-content: space-between; gap: 20px; color: #95a8c7; font-size: .8rem; letter-spacing: .03em; }
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 65px 7.5%; border-top: 1px solid #819ac51c; background: linear-gradient(140deg, #090d1b, #060912); scroll-margin-top: 25px; }
+    .about .eyebrow { margin-bottom: 14px; }
+    h2 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 550; line-height: 1.15; letter-spacing: -.04em; }
+    .about p:last-child { margin: 0; max-width: 440px; font-size: 1rem; line-height: 1.8; color: var(--muted); }
+    .about a { color: #c4b7ff; text-decoration: underline; text-underline-offset: 4px; }
+    .skip { position: absolute; top: -100px; left: 20px; padding: 12px; background: #15152d; z-index: 5; border-radius: 5px; }
+    .skip:focus { top: 20px; }
+    @media (min-width: 1600px) { .hero { min-height: 880px; } }
+    @media (max-width: 700px) {
+      body { padding: 12px; }
+      .shell { border-radius: 10px; }
+      .hero { min-height: 780px; min-height: max(740px, calc(100svh - 24px)); }
+      header { padding: 26px 7%; gap: 20px; align-items: flex-start; }
+      .brand { font-size: 1rem; gap: 9px; }
+      .orbit { width: 22px; height: 22px; }
+      nav { border: 0; background: transparent; padding: 4px 0; gap: 18px; font-size: .85rem; }
+      nav .github-nav { display: none; }
+      .content { padding: 88px 7% 250px; }
+      .eyebrow { font-size: .75rem; letter-spacing: .17em; }
+      h1 { font-size: clamp(2.8rem, 10.8vw, 4.5rem); }
+      .intro { max-width: 320px; font-size: 1rem; }
+      .cosmos { background-position: 54% center; }
+      .hero-footer { inset: auto 7% 25px; font-size: .75rem; }
+      .about { grid-template-columns: 1fr; padding: 45px 7%; gap: 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button, nav a { transition: none; } .button:hover { transform: none; } }
   </style>
 </head>
 <body>
-  <main>
-    <p class="brand">JIMZPAGE.COM</p>
-    <h1>Welcome to Jim's Page.</h1>
-    <p class="intro">A new home on the web. This is just the beginning—more coming soon.</p>
-    <footer>Jim's Page &middot; Under construction</footer>
-  </main>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <section class="hero" id="home" aria-label="Welcome to Jim's Page">
+      <div class="cosmos" aria-hidden="true"></div>
+      <header>
+        <a class="brand" href="#home" aria-label="Jim's Page home"><span class="orbit" aria-hidden="true"></span>Jim's Page</a>
+        <nav aria-label="Main navigation">
+          <a href="#home" aria-current="page">Home</a>
+          <a href="#about">About</a>
+          <a class="github-nav" href="https://github.com/copernicus99/JimzPage">GitHub</a>
+        </nav>
+      </header>
+      <main class="content" id="main">
+        <p class="eyebrow">A NEW SPACE. A NEW BEGINNING.</p>
+        <h1>A little space.<br><span>For big ideas.</span></h1>
+        <p class="intro">Welcome to Jim's Page. A home for projects, experiments, and whatever comes next.</p>
+        <div class="actions">
+          <a class="button primary" href="#about">Explore this space</a>
+          <a class="button secondary" href="https://github.com/copernicus99/JimzPage">View on GitHub</a>
+        </div>
+      </main>
+      <div class="hero-footer"><span>JIMZPAGE.COM</span><span>More on the horizon.</span></div>
+    </section>
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div><p class="eyebrow">JUST GETTING STARTED</p><h2>Room for what's next.</h2></div>
+      <p>This is the beginning of Jim's Page. For now, a small landing spot. Soon, a place to share new ideas and things I'm building. Follow along on <a href="https://github.com/copernicus99/JimzPage">GitHub</a>.</p>
+    </section>
+  </div>
 </body>
 </html>
+
